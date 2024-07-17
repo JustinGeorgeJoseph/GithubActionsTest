@@ -22,7 +22,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'Automated commit message'
-          branch: 'feature-branch'  # Source branch for the PR
+          branch: 'dev'  # Source branch for the PR
           base: 'main'  # Target branch for the PR
           title: 'Automated PR from GitHub Actions'
           body: 'This PR was created automatically by GitHub Actions.'

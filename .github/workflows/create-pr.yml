@@ -27,5 +27,3 @@ jobs:
           title: 'Automated PR from GitHub Actions'
           body: 'This PR was created automatically by GitHub Actions.'
           labels: 'automated-pr'
-      - name: Debugging Info
-        run: echo "PR creation step status: ${{ steps.create_pr.outputs.pull-request-url }}"

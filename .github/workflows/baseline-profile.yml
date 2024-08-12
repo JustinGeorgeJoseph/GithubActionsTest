@@ -6,6 +6,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    resources:
+      limits:
+        memory: 8GB
+        cpu: 2
+
     timeout-minutes: 120
 
     steps:

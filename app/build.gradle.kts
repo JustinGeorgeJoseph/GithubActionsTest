@@ -50,11 +50,7 @@ android {
     }
 }
 
-baselineProfile {
-    automaticGenerationDuringBuild = true
-    mergeIntoMain = true
-    saveInSrc = true
-}
+
 
 dependencies {
 

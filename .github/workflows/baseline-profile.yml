@@ -31,12 +31,8 @@ jobs:
         run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
       - name: Build release variant including baseline profile generation
-        run: ./gradlew :app:assembleBenchmarkRelease
-             -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile
-             -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
-             -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
-             -Pandroid.experimental.androidTest.numManagedDeviceShards=1
-             -Pandroid.experimental.testOptions.managedDevices.maxConcurrentDevices=1
+        run: ./gradlew generateBaselineProfile -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile -Pandroid.experimental.testOptions.managedDevices.setupTimeoutMinutes=20 -Dorg.gradle.workers.max=4
+
              
       # Create Pull Request
       - name: Create Pull Request

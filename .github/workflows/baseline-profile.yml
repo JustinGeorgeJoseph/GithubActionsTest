@@ -31,7 +31,7 @@ jobs:
         run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
       - name: Build release variant including baseline profile generation
-        run: ./gradlew generateBenchmarkReleaseBaselineProfile 
+        run: ./gradlew generateBaselineProfile 
              -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" 
              -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile 
              -Dorg.gradle.workers.max=4

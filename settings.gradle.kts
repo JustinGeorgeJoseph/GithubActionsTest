@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "GithubActionsTest"
 include(":app")
- 
+include(":baselineprofile")

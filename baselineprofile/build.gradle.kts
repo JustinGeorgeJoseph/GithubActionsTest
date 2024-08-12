@@ -32,7 +32,7 @@ android {
     // To use GMD please invoke generation through the command line:
     // ./gradlew :app:generateBaselineProfile
     testOptions.managedDevices.devices {
-        create<ManagedVirtualDevice>("pixel6Api34") {
+        create<ManagedVirtualDevice>("pixel6Api31") {
             device = "Pixel 6"
             apiLevel = 31
             systemImageSource = "aosp"

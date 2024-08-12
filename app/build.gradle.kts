@@ -50,6 +50,12 @@ android {
     }
 }
 
+baselineProfile {
+    automaticGenerationDuringBuild = true
+    mergeIntoMain = true
+    saveInSrc = true
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)

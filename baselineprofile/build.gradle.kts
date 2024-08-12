@@ -27,6 +27,7 @@ android {
     }
 
     targetProjectPath = ":app"
+    experimentalProperties["android.experimental.self-instrumenting"] = true
 
     // This code creates the gradle managed device used to generate baseline profiles.
     // To use GMD please invoke generation through the command line:

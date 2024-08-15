@@ -52,7 +52,11 @@ jobs:
              -Pandroid.experimental.androidTest.numManagedDeviceShards=1
              -Pandroid.experimental.testOptions.managedDevices.maxConcurrentDevices=1
 
-             
+      - name: Print build directory
+        run: |
+          echo "Build directory:"
+          ls -la app/build/generated/baselineprofiles/mergeBaselineProfile
+          
       # Create Pull Request
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5

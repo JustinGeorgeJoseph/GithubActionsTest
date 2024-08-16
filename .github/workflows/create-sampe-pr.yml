@@ -12,10 +12,16 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Create a file
-        run: echo "Hello, World!" > hello2.txt
+        run: echo "Hello, World!" > hello3.txt
 
       - name: Show created file
         run: cat hello2.txt
+
+      - name: Copy Files
+        run: |
+            mkdir -p app/main/baseline # Create the destination folder if it doesn't exist
+            cp home3.txt app/main/baseline/ # Copy all files from source_folder to destination_folder
+
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6

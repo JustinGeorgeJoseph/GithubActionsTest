@@ -1,0 +1,30 @@
+name: Create a File
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Create a file
+        run: echo "Hello, World!" > hello.txt
+
+      - name: Show created file
+        run: cat hello.txt
+
+      - name: Commit & Push Changes
+        run: |
+          git config --local user.email "you@example.com"
+          git config --local user.name "Your Name"
+          git add hello.txt
+          git commit -m "Add hello.txt"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

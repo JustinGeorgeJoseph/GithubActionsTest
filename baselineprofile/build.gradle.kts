@@ -37,7 +37,7 @@ testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = "EMULA
         create<com.android.build.api.dsl.ManagedVirtualDevice>("pixel6Api33") {
             device = "Pixel 6"
             apiLevel = 33
-            systemImageSource = "aosp"
+            systemImageSource = "aosp_atd"
             //systemImageSource = "aosp_atd"
         }
     }

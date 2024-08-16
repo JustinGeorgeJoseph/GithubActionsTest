@@ -55,7 +55,7 @@ jobs:
       - name: Print build directory
         run: |
           echo "Build directory:"
-          ls -la app/build/generated/baselineprofiles/mergeBaselineProfile
+          ls -la app/src/main/generated/baselineProfiles 
           
       # Create Pull Request
       - name: Create Pull Request

@@ -15,14 +15,12 @@ jobs:
         run: echo "Hello, World!" > hello.txt
 
       - name: Show created file
-        run: cat hello.txt
+        run: cat hello1.txt
 
-      - name: Commit & Push Changes
-        run: |
-          git config --local user.email "justingeorgejoseph@gmail.com"
-          git config --local user.name "Justin George"
-          git add hello.txt
-          git commit -m "Add hello.txt"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "Newly created file"
+          title: "Newly created file"
+          delete-branch: true
+          branch: actions/baseline-profiles

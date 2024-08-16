@@ -15,12 +15,12 @@ jobs:
         run: echo "Hello, World!" > hello3.txt
 
       - name: Show created file
-        run: cat hello2.txt
+        run: cat hello3.txt
 
       - name: Copy Files
         run: |
             mkdir -p app/main/baseline # Create the destination folder if it doesn't exist
-            cp home3.txt app/main/baseline/ # Copy all files from source_folder to destination_folder
+            cp hello3.txt app/main/baseline/ # Copy all files from source_folder to destination_folder
 
 
       - name: Create Pull Request

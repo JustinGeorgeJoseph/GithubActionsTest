@@ -1,9 +1,7 @@
-name: Create a File
+name: Create a sample pr
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   create-file:

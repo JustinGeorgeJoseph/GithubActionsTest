@@ -24,7 +24,10 @@ jobs:
 
       - name: Grant Permissions to gradlew
         run: chmod +x gradlew
-
+        
+      - name: Accept Android licenses
+        run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
+        
       - name: Build app and benchmark
         run: ./gradlew :app:assembleBenchmarkRelease # change the 'app' with your app module's name
 

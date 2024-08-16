@@ -45,23 +45,17 @@ jobs:
         run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
       - name: Build release variant including baseline profile generation
-        run: ./gradlew :app:assembleRelease
+        run: ./gradlew :app:generateBaselineProfile
              -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile
              -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
              -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
              -Pandroid.experimental.androidTest.numManagedDeviceShards=1
              -Pandroid.experimental.testOptions.managedDevices.maxConcurrentDevices=1
-
-      - name: Print build directory
-        run: |
-          echo "Build directory:"
-          ls -la app/src/main/generated/baselineProfiles 
           
-      # Create Pull Request
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: "Generate baseline profiles"
-          title: "Generate baseline profiles"
+          commit-message: "Newly Generated baseline file"
+          title: "Newly generated file"
           delete-branch: true
-          branch: actions/baseline-profiles       
+          branch: actions/generated-baseline-profiles

@@ -49,7 +49,7 @@ jobs:
 
     - name: Create pr
       run: |
-        gh pr create --base dev --head $NEW_BRANCH --title "Your PR Title" --body "Description of the changes"
+        gh pr create --base dev --head $NEW_BRANCH --title Your PR Title --body Description of the changes
         echo "Configured Git to automatically set up remote tracking for new branches."
    
 

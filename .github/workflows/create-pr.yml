@@ -12,6 +12,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    # Step 2: Configure Git with push.autoSetupRemote
+    - name: Configure Git push.autoSetupRemote
+      run: |
+        git config --global push.autoSetupRemote matching
+        echo "Configured Git to automatically set up remote tracking for new branches."
+
     # Step 2: Create a new branch
     - name: Create new branch
       run: |
@@ -30,7 +36,7 @@ jobs:
     # Step 4: Push the new branch to the repository
     - name: Push new branch to repository
       run: |
-        git push --set-upstream origin $NEW_BRANCH
+        git push origin $NEW_BRANCH
         echo "Pushed new branch: $NEW_BRANCH"
 
     # Step 5: Create a Pull Request from the new branch to another branch

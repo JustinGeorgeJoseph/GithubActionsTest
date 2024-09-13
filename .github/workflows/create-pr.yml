@@ -43,7 +43,7 @@ jobs:
 
     - name: Print changes
       run: |
-        git status .
+        git diff $NEW_BRANCH..dev
         echo "Printing status: $NEW_BRANCH"
 
     # Step 5: Create a Pull Request from the new branch to another branch

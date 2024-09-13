@@ -1,0 +1,32 @@
+name: Create a sample pr
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Create a file
+        run: echo "Hello, World!" > hello3.txt
+
+      - name: Show created file
+        run: cat hello3.txt
+
+      - name: Copy Files
+        run: |
+            mkdir -p app/main/baseline # Create the destination folder if it doesn't exist
+            cp hello3.txt app/main/baseline/ # Copy all files from source_folder to destination_folder
+
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Newly created file"
+          title: "Newly created file"
+          delete-branch: true
+          branch: actions/baseline-profiles

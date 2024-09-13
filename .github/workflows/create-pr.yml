@@ -41,6 +41,11 @@ jobs:
         git push origin $NEW_BRANCH
         echo "Pushed new branch: $NEW_BRANCH"
 
+    - name: Print changes
+      run: |
+        git status .
+        echo "Printing status: $NEW_BRANCH"
+
     # Step 5: Create a Pull Request from the new branch to another branch
       # Create Pull Request
     - name: Create Pull Requests
@@ -50,6 +55,7 @@ jobs:
           title: "Generate baseline profiles"
           branch: actions/baseline-profiles
           base: dev                      # The target branch for the PR (e.g., main)
+          delete-branch: true
           body: "This is an automated pull request to merge changes from $NEW_BRANCH to main."
 
 

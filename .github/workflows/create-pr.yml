@@ -1,7 +1,9 @@
 name: Create Pull Request
 
 on:
-  workflow_dispatch:
+  push:               # Optionally trigger on push to a specific branch (e.g., main)
+    branches:
+      - main
 
 jobs:
   create-branch-and-pr:

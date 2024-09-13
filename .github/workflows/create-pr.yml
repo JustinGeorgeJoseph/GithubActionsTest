@@ -13,12 +13,6 @@ jobs:
     # Step 1: Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0  # Fetch all branches
-
-    # Fetch all branches
-    - name: Fetch all branches
-      run: git fetch --all
       
     # Step 2: Configure Git with push.autoSetupRemote
     - name: Configure Git push.autoSetupRemote

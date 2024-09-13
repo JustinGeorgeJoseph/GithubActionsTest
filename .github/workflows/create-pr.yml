@@ -16,16 +16,41 @@ jobs:
       with:
         fetch-depth: 0  # Fetch all branches
 
+    # Fetch all branches
+    - name: Fetch all branches
+      run: git fetch --all
+      
+    # Step 2: Configure Git with push.autoSetupRemote
+    - name: Configure Git push.autoSetupRemote
+      run: |
+        git config --global --add --bool push.autoSetupRemote true
+        echo "Configured Git to automatically set up remote tracking for new branches."
+
+    # Step 2: Create a new branch
+    - name: Create new branch
+      run: |
+        NEW_BRANCH="new-feature-branch"  # Set the new branch name here
+        git checkout -b $NEW_BRANCH
+        echo "Created new branch: $NEW_BRANCH"
+    
+    # Step 3: Merge another branch into the new branch
+    - name: Merge source branch into the new branch
+      run: |
+        SOURCE_BRANCH="main"  # Branch to be merged into new branch
+        git fetch origin $SOURCE_BRANCH
+        git merge origin/$SOURCE_BRANCH --no-edit
+        echo "Merged $SOURCE_BRANCH into $NEW_BRANCH"
+
+
     # Step 5: Create a Pull Request from the new branch to another branch
       # Create Pull Request
     - name: Create Pull Requests
       uses: peter-evans/create-pull-request@v5
       with:
-        base: main
-        commit-message: "Generate baseline profiles"
-        title: "Generate baseline profiles"
-        branch: new/changes
-        delete-branch: true
-        body: "This is an automated pull request to merge changes from $NEW_BRANCH to main."
+          commit-message: "Generate baseline profiles"
+          title: "Generate baseline profiles"
+          branch: $NEW_BRANCH
+          delete-branch: true
+          body: "This is an automated pull request to merge changes from $NEW_BRANCH to main."
 
 

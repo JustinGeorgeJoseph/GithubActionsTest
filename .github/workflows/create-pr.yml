@@ -48,6 +48,8 @@ jobs:
         echo "Pushed new branch: $NEW_BRANCH"
 
     - name: Create pr
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
         gh pr create --base dev --head "$NEW_BRANCH" --title "Your PR Title" --body "Description of the changes"
         echo "Configured Git to automatically set up remote tracking for new branches."

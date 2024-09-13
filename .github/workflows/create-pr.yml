@@ -1,29 +1,53 @@
 name: Create Pull Request
 
 on:
-  workflow_dispatch:
+  push:               # Optionally trigger on push to a specific branch (e.g., main)
+    branches:
+      - main
 
 jobs:
-  create-pull-request:
+  create-branch-and-pr:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    # Step 1: Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    # Step 2: Configure Git with push.autoSetupRemote
+    - name: Configure Git push.autoSetupRemote
+      run: |
+        git config --global --add --bool push.autoSetupRemote true
+        echo "Configured Git to automatically set up remote tracking for new branches."
 
-      - name: Set up Git
-        run: |
-          git config user.name "Github actions"
-          git config user.email "actions@github.com"
+    # Step 2: Create a new branch
+    - name: Create new branch
+      run: |
+        NEW_BRANCH="new-feature-branch"  # Set the new branch name here
+        git checkout -b $NEW_BRANCH
+        echo "Created new branch: $NEW_BRANCH"
+    
+    # Step 3: Merge another branch into the new branch
+    - name: Merge source branch into the new branch
+      run: |
+        SOURCE_BRANCH="main"  # Branch to be merged into new branch
+        git fetch origin $SOURCE_BRANCH
+        git merge origin/$SOURCE_BRANCH --no-edit
+        echo "Merged $SOURCE_BRANCH into $NEW_BRANCH"
 
-      - name: Create Pull Request
-        id: create_pr
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'Automated commit message'
-          branch: 'dev'  # Source branch for the PR
-          base: 'main'  # Target branch for the PR
-          title: 'Automated PR from GitHub Actions'
-          body: 'This PR was created automatically by GitHub Actions.'
-          labels: 'automated-pr'
+    # Step 4: Push the new branch to the repository
+    - name: Push new branch to repository
+      run: |
+        git push origin $NEW_BRANCH
+        echo "Pushed new branch: $NEW_BRANCH"
+
+    - name: Create pr
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh pr create --base dev --head "$NEW_BRANCH" --title "The bug is fixed" --body "Everything works again" --label "Master changes to dev"
+        echo "Configured Git to automatically set up remote tracking for new branches."
+   
+
+
+

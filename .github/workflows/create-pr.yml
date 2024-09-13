@@ -45,7 +45,7 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        gh pr create --base dev --head "$NEW_BRANCH" --title "Your PR Title" --body "Description of the changes"
+        gh pr create --base dev --head "$NEW_BRANCH" --title --fill --label "Master changes to dev"
         echo "Configured Git to automatically set up remote tracking for new branches."
    
 

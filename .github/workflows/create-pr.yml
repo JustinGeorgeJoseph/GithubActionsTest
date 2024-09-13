@@ -15,7 +15,7 @@ jobs:
     # Step 2: Configure Git with push.autoSetupRemote
     - name: Configure Git push.autoSetupRemote
       run: |
-        git config --global push.autoSetupRemote matching
+        git config --global --add --bool push.autoSetupRemote true
         echo "Configured Git to automatically set up remote tracking for new branches."
 
     # Step 2: Create a new branch

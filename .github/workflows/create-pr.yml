@@ -48,8 +48,8 @@ jobs:
       run: |
         LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%S")
         MESSAGE="Master changes to dev after $LAST_COMMIT_MESSAGE"
-        gh pr create --base dev --head "$NEW_BRANCH" --title $MESSAGE --body $MESSAGE --label "Master changes to dev"
-        echo "Configured Git to automatically set up remote tracking for new branches."
+        gh pr create --base dev --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "Master changes to dev"
+        echo "Configured Git to set up remote tracking for new branches automatically."
    
 
 

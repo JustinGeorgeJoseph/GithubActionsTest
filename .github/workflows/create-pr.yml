@@ -13,18 +13,28 @@ jobs:
     # Step 1: Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v3
-      
+      with:
+        fetch-depth: 0  # Fetch all branches and their history
+
+          
     # Step 2: Configure Git to push remote repositories
     - name: Configure Git push.autoSetupRemote
       run: |
         git config --global --add --bool push.autoSetupRemote true
         echo "Configured git to push the newly created branch to remote repository"
 
+    - name: Set up Git config
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+
     # Step 2: Create a new branch
-    - name: Create new branch
+    - name: Create new branch from dev branch
       run: |
         LAST_COMMIT_HASH=$(git log -1 --pretty=format:"%h")
+        LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
         NEW_BRANCH="master-changes-to-dev-after-$LAST_COMMIT_HASH"
+        git checkout "dev"
         git checkout -b $NEW_BRANCH
         echo "Created new branch: $NEW_BRANCH"
     
@@ -46,7 +56,6 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
         MESSAGE="Master changes to dev after $LAST_COMMIT_MESSAGE"
         gh pr create --base dev --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "Master changes to dev"
         echo "Configured Git to set up remote tracking for new branches automatically."

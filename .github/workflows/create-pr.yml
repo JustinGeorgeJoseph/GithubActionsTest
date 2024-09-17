@@ -1,7 +1,7 @@
-name: Create Pull Request
+name: Create PR to push the master change to dev
 
 on:
-  push:               # Optionally trigger on push to a specific branch (e.g., main)
+  push:
     branches:
       - main
 
@@ -14,16 +14,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       
-    # Step 2: Configure Git with push.autoSetupRemote
+    # Step 2: Configure Git to push remote repositories
     - name: Configure Git push.autoSetupRemote
       run: |
         git config --global --add --bool push.autoSetupRemote true
-        echo "Configured Git to automatically set up remote tracking for new branches."
+        echo "Configured git to push the newly created branch to remote repository"
 
     # Step 2: Create a new branch
     - name: Create new branch
       run: |
-        NEW_BRANCH="new-feature-branch"  # Set the new branch name here
+        LAST_COMMIT_HASH=$(git log -1 --pretty=format:"%h")
+        NEW_BRANCH="master-changes-to-dev-after-$LAST_COMMIT_HASH"
         git checkout -b $NEW_BRANCH
         echo "Created new branch: $NEW_BRANCH"
     
@@ -36,7 +37,7 @@ jobs:
         echo "Merged $SOURCE_BRANCH into $NEW_BRANCH"
 
     # Step 4: Push the new branch to the repository
-    - name: Push new branch to repository
+    - name: Push new branch to the repository
       run: |
         git push origin $NEW_BRANCH
         echo "Pushed new branch: $NEW_BRANCH"
@@ -45,8 +46,10 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        gh pr create --base dev --head "$NEW_BRANCH" --title "The bug is fixed" --body "Everything works again" --label "Master changes to dev"
-        echo "Configured Git to automatically set up remote tracking for new branches."
+        LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%S")
+        MESSAGE="Master changes to dev after $LAST_COMMIT_MESSAGE"
+        gh pr create --base dev --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "Master changes to dev"
+        echo "Configured Git to set up remote tracking for new branches automatically."
    
 
 

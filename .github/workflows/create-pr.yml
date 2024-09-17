@@ -23,7 +23,7 @@ jobs:
     # Step 2: Create a new branch
     - name: Create new branch
       run: |
-        LAST_COMMIT_HASH = $(git log -1 --pretty=format:"%h")
+        LAST_COMMIT_HASH=$(git log -1 --pretty=format:"%h")
         NEW_BRANCH="master-changes-to-dev-after-$LAST_COMMIT_HASH"
         git checkout -b $NEW_BRANCH
         echo "Created new branch: $NEW_BRANCH"
@@ -46,7 +46,7 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        LAST_COMMIT_MESSAGE = $(git log -1 --pretty=format:"%S")
+        LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%S")
         gh pr create --base dev --head "$NEW_BRANCH" --title "Master changes to dev after $LAST_COMMIT_MESSAGE" --fill-verbose --label "Master changes to dev"
         echo "Configured Git to automatically set up remote tracking for new branches."
    

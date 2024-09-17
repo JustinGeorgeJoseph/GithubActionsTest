@@ -33,6 +33,7 @@ jobs:
       run: |
         LAST_COMMIT_HASH=$(git log -1 --pretty=format:"%h")
         LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+        echo "Last commit message $LAST_COMMIT_MESSAGE"
         NEW_BRANCH="master-changes-to-dev-after-$LAST_COMMIT_HASH"
         git checkout "dev"
         git checkout -b $NEW_BRANCH
@@ -56,7 +57,6 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
         MESSAGE="Master changes to dev after $LAST_COMMIT_MESSAGE"
         gh pr create --base dev --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "Master changes to dev"
         echo "Configured Git to set up remote tracking for new branches automatically."

@@ -13,7 +13,14 @@ jobs:
     # Step 1: Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v3
-      
+      with:
+        ref: main
+
+    - name: Checkout dev branch
+      uses: actions/checkout@v3
+      with:
+        ref: dev
+          
     # Step 2: Configure Git to push remote repositories
     - name: Configure Git push.autoSetupRemote
       run: |

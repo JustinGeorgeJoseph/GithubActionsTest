@@ -13,8 +13,6 @@ jobs:
     # Step 1: Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v3
-      with:
-        ref: main
       
     # Step 2: Configure Git to push remote repositories
     - name: Configure Git push.autoSetupRemote
@@ -23,10 +21,11 @@ jobs:
         echo "Configured git to push the newly created branch to remote repository"
 
     # Step 2: Create a new branch
-    - name: Create new branch
+    - name: Create new branch from dev branch
       run: |
         LAST_COMMIT_HASH=$(git log -1 --pretty=format:"%h")
         NEW_BRANCH="master-changes-to-dev-after-$LAST_COMMIT_HASH"
+        git checkout "dev"
         git checkout -b $NEW_BRANCH
         echo "Created new branch: $NEW_BRANCH"
     

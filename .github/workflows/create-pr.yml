@@ -37,7 +37,7 @@ jobs:
         echo "Merged $SOURCE_BRANCH into $NEW_BRANCH"
 
     # Step 4: Push the new branch to the repository
-    - name: Push new branch to repository
+    - name: Push new branch to the repository
       run: |
         git push origin $NEW_BRANCH
         echo "Pushed new branch: $NEW_BRANCH"
@@ -48,7 +48,7 @@ jobs:
       run: |
         LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%S")
         MESSAGE="Master changes to dev after $LAST_COMMIT_MESSAGE"
-        gh pr create --base dev --head "$NEW_BRANCH" --title MESSAGE --BODY MESSAGE --label "Master changes to dev"
+        gh pr create --base dev --head "$NEW_BRANCH" --title MESSAGE --body MESSAGE --label "Master changes to dev"
         echo "Configured Git to automatically set up remote tracking for new branches."
    
 

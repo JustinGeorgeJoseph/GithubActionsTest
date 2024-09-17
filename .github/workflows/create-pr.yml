@@ -32,7 +32,6 @@ jobs:
       run: |
         LAST_COMMIT_HASH=$(git log -1 --pretty=format:"%h")
         NEW_BRANCH="master-changes-to-dev-after-$LAST_COMMIT_HASH"
-        git checkout "dev"
         git checkout -b $NEW_BRANCH
         echo "Created new branch: $NEW_BRANCH"
     
@@ -40,6 +39,7 @@ jobs:
     - name: Merge source branch into the new branch
       run: |
         SOURCE_BRANCH="main"  # Branch to be merged into new branch
+        git fetch origin $NEW_BRANCH
         git fetch origin $SOURCE_BRANCH
         git merge origin/$SOURCE_BRANCH --no-edit
         echo "Merged $SOURCE_BRANCH into $NEW_BRANCH"

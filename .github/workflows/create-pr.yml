@@ -59,7 +59,7 @@ jobs:
       run: |
         echo "Last commit message -  $COMMIT_MESSAGE"
         MESSAGE="Master changes to dev after $COMMIT_MESSAGE"
-        gh pr create --base "dev" --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "Master changes to dev"
+        gh pr create --base "dev" --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "master-changes-to-dev"
         echo "Created PR successfully."
    
 

@@ -42,26 +42,24 @@ jobs:
     # Step 3: Merge another branch into the new branch
     - name: Merge source branch into the new branch
       run: |
-        echo "Last commit message -  $COMMIT_MESSAGE"
         SOURCE_BRANCH="main"  # Branch to be merged into new branch
         git fetch origin $SOURCE_BRANCH
         git merge origin/$SOURCE_BRANCH --no-edit
         echo "Merged $SOURCE_BRANCH into $NEW_BRANCH"
 
     # Step 4: Push the new branch to the repository
-    - name: Push new branch to the repository
+    - name: Push new branch to the remote repository
       run: |
-        echo "Last commit message - $COMMIT_MESSAGE"
         git push origin $NEW_BRANCH
         echo "Pushed new branch: $NEW_BRANCH"
 
-    - name: Create pr
+    - name: Create PR for the newly created branch to dev
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
         echo "Last commit message -  $COMMIT_MESSAGE"
         MESSAGE="Master changes to dev after $COMMIT_MESSAGE"
-        gh pr create --base dev --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "Master changes to dev"
+        gh pr create --base "dev" --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "Master changes to dev"
         echo "Configured Git to set up remote tracking for new branches automatically."
    
 

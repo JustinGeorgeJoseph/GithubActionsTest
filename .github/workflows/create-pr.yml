@@ -29,6 +29,7 @@ jobs:
         git config --global user.name "GitHub Actions"
         echo "Created new branch: $NEW_BRANCH"
         echo "Last commit message - $LAST_COMMIT_MESSAGE"
+        printenv
         cat GITHUB_ENV
 
     # Step 2: Create a new branch

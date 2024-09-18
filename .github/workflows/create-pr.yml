@@ -28,6 +28,7 @@ jobs:
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
         echo "Created new branch: $NEW_BRANCH"
+        echo "Last commit message - $LAST_COMMIT_MESSAGE"
         cat GITHUB_ENV
 
     # Step 2: Create a new branch

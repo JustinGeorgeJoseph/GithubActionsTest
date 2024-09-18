@@ -31,9 +31,9 @@ jobs:
     # Step 2: Create a new branch
     - name: Create new branch from dev branch
       run: |
-        LAST_COMMIT_HASH=$(git log -1 --pretty=format:"%h")
-        TEMP_LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
-        echo "LAST_COMMIT_MESSAGE=$TEMP_LAST_COMMIT_MESSAGE" >> $GITHUB_ENV
+        MASTER_BARNCH_LAST_COMMIT_HASH=$(git log -1 --pretty=format:"%h")
+        MASTER_BARNCH_LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+        echo "COMMIT_MESSAGE=$MASTER_BARNCH_LAST_COMMIT_MESSAGE" >> $GITHUB_ENV
         NEW_BRANCH="master-changes-to-dev-after-$LAST_COMMIT_HASH"
         git checkout "dev"
         git checkout -b $NEW_BRANCH
@@ -42,7 +42,7 @@ jobs:
     # Step 3: Merge another branch into the new branch
     - name: Merge source branch into the new branch
       run: |
-        echo "Last commit message -  $LAST_COMMIT_MESSAGE"
+        echo "Last commit message -  $COMMIT_MESSAGE"
         SOURCE_BRANCH="main"  # Branch to be merged into new branch
         git fetch origin $SOURCE_BRANCH
         git merge origin/$SOURCE_BRANCH --no-edit
@@ -51,7 +51,7 @@ jobs:
     # Step 4: Push the new branch to the repository
     - name: Push new branch to the repository
       run: |
-        echo "Last commit message - $LAST_COMMIT_MESSAGE"
+        echo "Last commit message - $COMMIT_MESSAGE"
         git push origin $NEW_BRANCH
         echo "Pushed new branch: $NEW_BRANCH"
 
@@ -59,8 +59,8 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        echo "Last commit message -  $LAST_COMMIT_MESSAGE"
-        MESSAGE="Master changes to dev after $LAST_COMMIT_MESSAGE"
+        echo "Last commit message -  $COMMIT_MESSAGE"
+        MESSAGE="Master changes to dev after $COMMIT_MESSAGE"
         gh pr create --base dev --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "Master changes to dev"
         echo "Configured Git to set up remote tracking for new branches automatically."
    

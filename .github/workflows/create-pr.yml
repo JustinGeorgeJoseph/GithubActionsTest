@@ -48,7 +48,7 @@ jobs:
         echo "Merged $SOURCE_BRANCH into $NEW_BRANCH"
 
     # Step 4: Push the new branch to the repository
-    - name: Push new branch to the remote repository
+    - name: Push the new branch to the remote repository
       run: |
         git push origin $NEW_BRANCH
         echo "Pushed new branch: $NEW_BRANCH"
@@ -59,7 +59,7 @@ jobs:
       run: |
         echo "Last commit message -  $COMMIT_MESSAGE"
         MESSAGE="Master changes to dev after $COMMIT_MESSAGE"
-        gh pr create --base "dev" --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "Master changes to dev"
+        gh pr create --base "dev" --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "master-changes-to-dev"
         echo "Created PR successfully."
    
 

@@ -60,7 +60,7 @@ jobs:
         echo "Last commit message -  $COMMIT_MESSAGE"
         MESSAGE="Master changes to dev after $COMMIT_MESSAGE"
         gh pr create --base "dev" --head "$NEW_BRANCH" --title "$MESSAGE" --body "$MESSAGE" --label "Master changes to dev"
-        echo "Configured Git to set up remote tracking for new branches automatically."
+        echo "Created PR successfully."
    
 
 

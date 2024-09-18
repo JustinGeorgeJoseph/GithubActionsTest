@@ -27,16 +27,12 @@ jobs:
       run: |
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
-        echo "Created new branch: $NEW_BRANCH"
-        echo "Last commit message - $LAST_COMMIT_MESSAGE"
-        printenv
-        cat GITHUB_ENV
 
     # Step 2: Create a new branch
     - name: Create new branch from dev branch
       run: |
         LAST_COMMIT_HASH=$(git log -1 --pretty=format:"%h")
-        LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+        LAST_COMMIT_MESSAGE="nice"
         echo "Last commit message - $LAST_COMMIT_MESSAGE"
         NEW_BRANCH="master-changes-to-dev-after-$LAST_COMMIT_HASH"
         git checkout "dev"

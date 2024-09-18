@@ -32,8 +32,8 @@ jobs:
     - name: Create new branch from dev branch
       run: |
         LAST_COMMIT_HASH=$(git log -1 --pretty=format:"%h")
-        LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
-        echo "Last commit message - $LAST_COMMIT_MESSAGE"
+        TEMP_LAST_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+        echo "LAST_COMMIT_MESSAGE=$TEMP_LAST_COMMIT_MESSAGE" >> $GITHUB_ENV
         NEW_BRANCH="master-changes-to-dev-after-$LAST_COMMIT_HASH"
         git checkout "dev"
         git checkout -b $NEW_BRANCH

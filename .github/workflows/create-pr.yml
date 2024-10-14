@@ -20,7 +20,7 @@ jobs:
     # Step 2: Configure Git to push remote repositories
     - name: Configure Git push.autoSetupRemote
       run: |
-        git config --global --add --bool push.autoSetupRemote true
+        git config --add --bool push.autoSetupRemote true
         echo "Configured git to push the newly created branch to remote repository"
 
     - name: Set up Git config

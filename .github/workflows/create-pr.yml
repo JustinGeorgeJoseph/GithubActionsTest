@@ -14,7 +14,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0  # Fetch all branches and their history
+        fetch-depth: 0  # Fetch all branches and their historysss
 
           
     # Step 2: Configure Git to push remote repositories

@@ -2,6 +2,17 @@ pipeline {
     agent any
 
     stages {
+
+           stage('Print something') {
+                steps {
+                    script {
+                                            echo "✅ Start working."
+
+                    }
+                }
+            }
+
+
         stage('Checkout -1') {
             steps {
                 script {

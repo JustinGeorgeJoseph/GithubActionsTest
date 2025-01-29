@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     checkout scmGit(
-                        branches: [[name: '*/github-lfs-test']],
+                        branches: [[name: '*/main']],
                         userRemoteConfigs: [[
                             url: 'git@github.com:JustinGeorgeJoseph/GithubActionsTest.git', // Use SSH or HTTPS
                             credentialsId: 'justin_george_joseph' // Set this up in Jenkins
